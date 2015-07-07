@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>文档</title>
+    <style>
+        body{font-family: "DejaVu Sans",Arial,Helvetica,sans-serif;font-size: 14px;margin: 0;}
+        a{
+        color:#4a6782;
+        text-decoration: none;
+        }
+        h1{font-size: 14px;padding: 5px; background-color: #4a6782;color: #FFFFFF; margin: 0px; margin-bottom:10px; }
+        #list_div {margin-left: 0px; margin-top: 0px; width:20%;}
+        .lcp {
+        font-size: 12px;
+        color: #CCCCCC;
+        font-weight: bold;
+        }
+        .lcpH {
+        font-size: 12px;
+        color: #666666;
+        font-weight: bold;
+        }
+        .apiLinkItem a:hover {
+        text-decoration: underline;
+        }
+        .apiLinkItem{
+        margin-left:10px;
+        }
+        a{color:#4a6782;}
+        .content {
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        }
+        .hb {
+        background-color: #eee;
+        }
+        .htd {
+        width: 100px;
+        }
+        .content table {
+        width: 100%;
+        }
+        .paramTable_h {
+        background-color: #666666;
+        color: #FFFFFF;
+        }
+        .paramTable_hr_hb {
+        background-color: #ddd;
+        }
+        .preRed {
+        background-color: #FFE1E1;
+        border: 1px dashed #CCCCCC;
+        padding: 10px;
+        }
+        .preGreen {
+        background-color: #D7FFD7;
+        border: 1px dashed #CCCCCC;
+        padding: 10px;
+        }
+        .beizhu {
+        background-color: #FFFFCC;
+        border: 1px dashed #CCCCCC;
+        padding: 10px;
+        }
+        .headA {
+        font-size: 20px;
+        padding: 10px;
+        background-color: #4a6782;
+        color: #FFFFFF;
+        margin: 0px;
+        font-weight: bold;
+        display: block;
+        }
+        .headA span {
+        font-size: 16px;
+        font-weight: bold;
+        }
+        #changeLogTable {
+        width: 800px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        }
+        .cltHeader {
+        background-color: #333333;
+        color: #FFFFFF;
+        }
+        .hb {
+        background-color: #eee;
+        }
+    </style>
+</head>
+
+<body style=" height:100%">
+
+<div style="width:100%; height: 100%; background-color:#666">
+
+    <div style=" position: fixed; top:0px; left:0px;" id="list_div">
+        <h1>API列表</h1>
+        {list}
+    </div>
+
+    <div style="width:20%; height:100%;   float:left; ">
+        &nbsp;
+    </div>
+    <div style="width:78%;height:100%; float:left; border-left:solid 2px #666666;">
+        <div style=" margin-left:20px; margin-top:10px; margin-bottom:10px;">
+            {docInfo}
+            <div id="lastModify">Last modify: {lastModify}</div>
+        </div>
+        <a name="1F"></a>
+        {content}
+    </div>
+</div>
+</body>
+</html>
