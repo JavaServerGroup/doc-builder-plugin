@@ -141,4 +141,7 @@ public class MethodParser {
         }
     }
 
+    public static String parseForWho(Method method) {
+        return method.getAnnotation(DocApi.class).forWho();
+    }
 }

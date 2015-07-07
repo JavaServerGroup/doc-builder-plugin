@@ -12,9 +12,9 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @goal build
@@ -88,7 +88,27 @@ public class BuilderMojo extends AbstractMojo {
             //遍历method集合，解析出可用的apiModel对象集合
             List<ApiModel> apiModelList = apiModelList = parseMethodToApiModel(methodLists);
 
-            Generator.generateMainHtml(new File(outPath + fileName), resources, apiModelList);
+            Map<String, List<ApiModel>> apiModelListWithForWho = new HashMap<>();
+
+            for(ApiModel apiModel : apiModelList) {
+                List<ApiModel> apiModelListWithForWhoItem = apiModelListWithForWho.get(apiModel.getForWho());
+                if(apiModelListWithForWhoItem == null){
+                    List<ApiModel> apiModelListForWho = new ArrayList<>();
+                    apiModelListForWho.add(apiModel);
+                    apiModelListWithForWho.put(apiModel.getForWho(), apiModelListForWho);
+                } else {
+                    apiModelListWithForWhoItem.add(apiModel);
+                    apiModelListWithForWho.put(apiModel.getForWho(), apiModelListWithForWhoItem);
+                }
+            }
+
+            for(String key : apiModelListWithForWho.keySet()) {
+                if("default".equals(key)){
+                    Generator.generateMainHtml(new File(outPath + fileName), resources, apiModelListWithForWho.get(key));
+                } else {
+                    Generator.generateMainHtml(new File(outPath + "for_" + key  + "_" + fileName), resources, apiModelListWithForWho.get(key));
+                }
+            }
 
         } catch (ClassNotFoundException | IllegalAccessException | IOException | InstantiationException | NoSuchFieldException e) {
             e.printStackTrace();
@@ -167,6 +187,7 @@ public class BuilderMojo extends AbstractMojo {
             apiModel.setSuccessType(MethodParser.parseSuccessParam(method));
             apiModel.setSuccessReturn(MethodParser.paresSuccessReturnType(method));
             apiModel.setIsDeprecated(MethodParser.parseIsDeprecated(method));
+            apiModel.setForWho(MethodParser.parseForWho(method));
             return apiModel;
         } else {
             throw new RuntimeException("本方法应该有@DocApi注解才对");

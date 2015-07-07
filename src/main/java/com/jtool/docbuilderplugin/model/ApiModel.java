@@ -12,6 +12,7 @@ public class ApiModel implements Comparator<ApiModel> {
 	private String info;
 	private String host;
 	private String url;
+	private String forWho;
 	private String method;
 	private List<Class> requestType;
 	private List<Class> errorType;
@@ -129,6 +130,14 @@ public class ApiModel implements Comparator<ApiModel> {
 		this.successType = successType;
 	}
 
+	public String getForWho() {
+		return forWho;
+	}
+
+	public void setForWho(String forWho) {
+		this.forWho = forWho;
+	}
+
 	@Override
 	public String toString() {
 		return "ApiModel{" +
@@ -138,6 +147,7 @@ public class ApiModel implements Comparator<ApiModel> {
 				", info='" + info + '\'' +
 				", host='" + host + '\'' +
 				", url='" + url + '\'' +
+				", forWho='" + forWho + '\'' +
 				", method='" + method + '\'' +
 				", requestType=" + requestType +
 				", errorType=" + errorType +
