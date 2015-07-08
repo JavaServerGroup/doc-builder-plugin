@@ -1,12 +1,13 @@
 package com.jtool.docbuilderplugin;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jtool.doc.annotation.DocField;
 import com.jtool.docbuilderplugin.model.ApiModel;
 import com.jtool.docbuilderplugin.model.Param;
 import com.jtool.docbuilderplugin.util.FileUtil;
 import com.jtool.docbuilderplugin.util.MyClassLoader;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.validation.constraints.*;
 import java.io.File;
@@ -61,8 +62,7 @@ public class Generator {
             List<Param> errorParams = genErrorParamList(api.getErrorType());
             result = result.replace("{errorParams}", makeErrorParamStr(errorParams));
 
-            String successRetrunJSON = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(genParamJsonObj(api.getSuccessReturn()));
-            result = result.replace("{successReturn}", successRetrunJSON);
+            result = result.replace("{successReturn}", JSON.toJSONString(api.getSuccessReturn(), SerializerFeature.PrettyFormat));
 
             List<Param> successParams = genParamDoc(api.getSuccessType());
             result = result.replace("{successParams}", makeSuccessParamStr(successParams));
